@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+users = User.create!(
+  [
+    {email: 'olivia@example.com', name: 'Olivia', password: 'password', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")},
+    {email: 'james@example.com', name: 'James', password: 'password', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
+    {email: 'lucas@example.com', name: 'Lucas', password: 'password', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/kakedasu_suit1.png"), filename:"sample-user3.jpg")}
+  ]
+)
+
+PostImage.create!(
+  [
+    {shop_name: 'Cavello', image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/cafe_morning_coffee_set_ogura.png"), filename:"cafe_morning_coffee_set_ogura.png"), caption: '大人気のカフェです。', user_id: users[0].id },
+    {shop_name: '和食屋せん', image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/food_buridaikon.png"), filename:"food_buridaikon.png"), caption: '日本料理は美しい！', user_id: users[1].id },
+    {shop_name: 'ShoreditchBar', image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/food_tacos.png"), filename:"food_tacos.png"), caption: 'メキシコ料理好きな方にオススメ！', user_id: users[2].id }
+  ]
+)
